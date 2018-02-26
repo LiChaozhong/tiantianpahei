@@ -12,8 +12,8 @@
         android:text="打开手电筒" />
 
     <Button
-        android:id="@+id/btn_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="关闭手电筒" />
+    android:id="@+id/btn_close"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="关闭手电筒" />
 </LinearLayout>

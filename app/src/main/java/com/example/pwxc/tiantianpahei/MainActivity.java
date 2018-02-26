@@ -2,6 +2,7 @@ package com.example.pwxc.tiantianpahei;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
     public void turnOnFlashLight() {
 
