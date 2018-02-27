@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private Button mTorchOnButton;
     private Button mTorchOffButton;
     private Boolean isTorchOn;
-    private Handler handler = new Handler() {
+
+    Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             // 要做的事情
             super.handleMessage(msg);
@@ -72,15 +73,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     turnOnFlashLight();
-                    try {
-                        Thread.sleep(10000);// 线程暂停10秒，单位毫秒
-                        Message message = new Message();
-                        message.what = 1;
-                        handler.sendMessage(message);// 发送消息
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    isTorchOn = true;
+                    TimeControl timeControl = new TimeControl();
+                    new Thread(timeControl).start();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
