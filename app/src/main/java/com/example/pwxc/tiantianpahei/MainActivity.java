@@ -2,7 +2,6 @@ package com.example.pwxc.tiantianpahei;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
@@ -24,12 +23,14 @@ public class MainActivity extends AppCompatActivity {
     private Button mTorchOnButton;
     private Button mTorchOffButton;
     private Boolean isTorchOn;
+    private Boolean isClose = true;
 
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
-            // 要做的事情
             super.handleMessage(msg);
+            if(isClose){
             turnOffFlashLight();
+            }
         }
     };
 
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    isClose = true;
                     turnOnFlashLight();
                     TimeControl timeControl = new TimeControl();
                     new Thread(timeControl).start();
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     turnOffFlashLight();
                     isTorchOn = false;
+                    isClose = false;
 
                 } catch (Exception e) {
                     e.printStackTrace();
