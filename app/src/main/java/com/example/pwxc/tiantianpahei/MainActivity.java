@@ -1,7 +1,9 @@
 package com.example.pwxc.tiantianpahei;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
@@ -158,6 +160,13 @@ public class MainActivity extends AppCompatActivity {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+        }
+    }
+
+    class TimeControlReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent){
+
         }
     }
 }
