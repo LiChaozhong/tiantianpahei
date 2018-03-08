@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Random;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,20 +27,23 @@ public class MainActivity extends AppCompatActivity {
     private Button mTorchOnButton;
     private Button mTorchOffButton;
     private Boolean isTorchOn;
-    private Boolean isClose = true;
+    private int randNum;
 
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if(isClose){
-            turnOffFlashLight();
+            if(msg.what == randNum){
+                Log.e("message",msg.what+"");
+                turnOffFlashLight();
             }
+
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Random rand = new Random();
         Log.d("FlashLightActivity", "onCreate()");
         setContentView(R.layout.activity_main);
         mTorchOnButton = (Button) findViewById(R.id.btn_open);
@@ -75,8 +80,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    isClose = true;
                     turnOnFlashLight();
+                    randNum = rand.nextInt();
+                    Log.e("randnum",randNum+"");
                     TimeControl timeControl = new TimeControl();
                     new Thread(timeControl).start();
                 } catch (Exception e) {
@@ -90,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     turnOffFlashLight();
                     isTorchOn = false;
-                    isClose = false;
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -152,9 +157,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run(){
             try {
+                int x = randNum;
                 Thread.sleep(10000);// 线程暂停10秒，单位毫秒
                 Message message = new Message();
-                message.what = 1;
+                message.what = x;
                 handler.sendMessage(message);// 发送消息
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
